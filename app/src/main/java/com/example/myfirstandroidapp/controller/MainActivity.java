@@ -43,13 +43,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         //clear preferences
-        //getSharedPreferences("PREFS", 0).edit().clear().commit(); getPreferences(MODE_PRIVATE).edit().clear().commit();
+        //getSharedPreferences("PREFS", 0).edit().clear().commit();
 
         System.out.println("MainActivity::onCreate()");
 
         mUser = new User();
 
-        //izmjena --> getPref(MODE_PRIVATE) --> getSharedPref
         mPreferences = getSharedPreferences("PREFS", 0);
 
         mGreetingText = findViewById(R.id.activity_main_TextView);
@@ -96,28 +95,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (btnPressed == 1) {
             mUser.setmFirstName(mNameInput.getText().toString());
 
-            //Spremi ime u preferences, key->s
-            /*
-            SharedPreferences.Editor editor = mPreferences.edit();
-            editor.putString(PREF_USERNAME_KEY, mUser.getmFirstName());
-            editor.apply();*/
-
-
             Intent gameActivity = new Intent(MainActivity.this, GameActivity.class);
             startActivityForResult(gameActivity, GAME_ACTIVITY_REQUEST_CODE);
         }
         //Leaderboard
         else if (btnPressed == 2) {
 
-            /*mPreferences = getSharedPreferences("PREFS", 0);
-            SharedPreferences.Editor editor = mPreferences.edit();
-            editor.putInt(PREF_SCORE_KEY, mUser.getmScore());
-            editor.putString(PREF_USERNAME_KEY, mUser.getmFirstName());
-            editor.apply();*/
-
             Intent leaderboardActivity = new Intent(getApplicationContext(), LeaderboardActivity.class);
-            //leaderboardActivity.putExtra(BUNDLE_USER_NAME, mUser.getmFirstName());
-            //leaderboardActivity.putExtra(BUNDLE_USER_SCORE, mUser.getmScore());
             startActivity(leaderboardActivity);
             finish();
         }
